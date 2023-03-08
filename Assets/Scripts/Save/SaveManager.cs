@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 public static class SaveManager
@@ -11,10 +10,8 @@ public static class SaveManager
 
     public static void Save(SaveData saveData)
     {
-        string json = JsonUtility.ToJson(saveData);
+        string json = JsonUtility.ToJson(saveData, true);
         File.WriteAllText(SaveDataPath(), json);
-
-        Debug.Log(json);
     }
 
     public static SaveData Load()

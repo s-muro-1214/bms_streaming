@@ -13,7 +13,7 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        long totalCount = SaveDataController.I.SaveData.totalCount.GetTotalSum();
+        long totalCount = SaveDataController.I.GetTotalCount().GetTotalSum();
 
         _total.text = totalCount.ToString();
         _today.text = "0";
@@ -24,11 +24,16 @@ public class Counter : MonoBehaviour
     private void OnGUI()
     {
         int todayCount = KeyLogger.I.TodayCounts.Sum();
-        long totalCount = SaveDataController.I.SaveData.totalCount.GetTotalSum() + todayCount;
-        double density = Math.Round(todayCount / Time.time, 1);
+        long totalCount = SaveDataController.I.GetTotalCount().GetTotalSum() + todayCount;
+        double density = Math.Round(todayCount / KeyLogger.I.PlayTime, 1, MidpointRounding.AwayFromZero);
+
+        if (Double.IsNaN(density))
+        {
+            density = 0.0;
+        }
 
         _total.text = totalCount.ToString();
         _today.text = todayCount.ToString();
-        _density.text = density.ToString();
+        _density.text = density.ToString("F1");
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class KeyLogger : MonoBehaviour
@@ -22,7 +24,13 @@ public class KeyLogger : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // TODO: beatorajaのStateがPLAYの場合だけカウント
+        if (!BeatorajaWatcher.I.State.Equals("PLAY"))
+        {
+            return;
+        }
+
+        // プレイ時間の加算
+        PlayTime += Time.deltaTime;
 
         // 鍵盤の回数カウント
         for (int i = 0; i < 7; i++)
@@ -95,4 +103,7 @@ public class KeyLogger : MonoBehaviour
 
     // 各鍵盤と皿の打鍵回数(Today) 皿↑、皿↓、1～7の順
     public List<int> TodayCounts { get; } = new(9) { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+    // プレイ時間
+    public float PlayTime { get; private set; } = 0.0f;
 }

@@ -1,31 +1,62 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SaveDataController : MonoBehaviour
 {
+    private SaveData _saveData;
 
     public void SetSaveData(SaveData saveData)
     {
-        SaveData = saveData;
+        _saveData = saveData;
     }
 
     public void AddTotalCount(List<int> todaysTotal)
     {
-        SaveData.totalCount.scratchL += todaysTotal[0];
-        SaveData.totalCount.scratchR += todaysTotal[1];
-        SaveData.totalCount.key1 += todaysTotal[2];
-        SaveData.totalCount.key2 += todaysTotal[3];
-        SaveData.totalCount.key3 += todaysTotal[4];
-        SaveData.totalCount.key4 += todaysTotal[5];
-        SaveData.totalCount.key5 += todaysTotal[6];
-        SaveData.totalCount.key6 += todaysTotal[7];
-        SaveData.totalCount.key7 += todaysTotal[8];
+        _saveData.totalCount.scratchL += todaysTotal[0];
+        _saveData.totalCount.scratchR += todaysTotal[1];
+        _saveData.totalCount.key1 += todaysTotal[2];
+        _saveData.totalCount.key2 += todaysTotal[3];
+        _saveData.totalCount.key3 += todaysTotal[4];
+        _saveData.totalCount.key4 += todaysTotal[5];
+        _saveData.totalCount.key5 += todaysTotal[6];
+        _saveData.totalCount.key6 += todaysTotal[7];
+        _saveData.totalCount.key7 += todaysTotal[8];
+    }
+
+    public void SetCurrentBgColor(Color32 color)
+    {
+        _saveData.displaySettings.color.red = color.r;
+        _saveData.displaySettings.color.green = color.g;
+        _saveData.displaySettings.color.blue = color.b;
+        _saveData.displaySettings.color.alpha = color.a;
     }
 
     public static SaveDataController I { get; private set; }
 
-    public SaveData SaveData { get; private set; }
+    public SaveData GetSaveData()
+    {
+        return _saveData;
+    }
+
+    public DisplaySettings GetDisplaySettings()
+    {
+        return _saveData.displaySettings;
+    }
+
+    public KeySettings GetKeySettings()
+    {
+        return _saveData.keySettings;
+    }
+
+    public TotalCount GetTotalCount()
+    {
+        return _saveData.totalCount;
+    }
+
+    public Beatoraja GetBeatoraja()
+    {
+        return _saveData.beatoraja;
+    }
 
     private void Awake()
     {
@@ -34,6 +65,6 @@ public class SaveDataController : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 }

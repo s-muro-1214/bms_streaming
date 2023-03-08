@@ -57,6 +57,22 @@ MonoBehaviour:
     m_Address: MatReleased
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: b078e0d4464164f4788da07a7f7ad029
+    m_Address: MatSelected
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4e133ebf34fb15c418e5117c176d6a6c
+    m_Address: SE1pware
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 50e7d0d2668d1e44b854af72826683dd
+    m_Address: SE2pware
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ed9256302544cbd4eac5c0a065b3fe44
+    m_Address: SEgomi
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 820a61a03bb4e5644b28a378973aa2ea, type: 2}
   m_SchemaSet:

@@ -16,38 +16,7 @@ public class BmsTool : MonoBehaviour
         SaveData saveData = SaveManager.Load();
         if (saveData == null)
         {
-            saveData = new SaveData()
-            {
-                displaySettings = new DisplaySettings()
-                {
-                    kps = true,
-                    randomPattern = true,
-                    counter = true
-                },
-                keySettings = new KeySettings()
-                {
-                    scratch = "stick",
-                    key1 = "trigger",
-                    key2 = "button2",
-                    key3 = "button3",
-                    key4 = "button4",
-                    key5 = "button5",
-                    key6 = "button6",
-                    key7 = "button7",
-                },
-                totalCount = new TotalCount()
-                {
-                    scratchL = 0,
-                    scratchR = 0,
-                    key1 = 0,
-                    key2 = 0,
-                    key3 = 0,
-                    key4 = 0,
-                    key5 = 0,
-                    key6 = 0,
-                    key7 = 0
-                }
-            };
+            saveData = SaveData.Initialize();
         }
 
         SaveDataController.I.SetSaveData(saveData);
@@ -65,7 +34,7 @@ public class BmsTool : MonoBehaviour
             return;
         }
 
-        KeySettings settings = SaveDataController.I.SaveData.keySettings;
+        KeySettings settings = SaveDataController.I.GetKeySettings();
 
         foreach (InputControl key in Joystick.current.allControls)
         {
@@ -83,7 +52,7 @@ public class BmsTool : MonoBehaviour
     private void OnApplicationQuit()
     {
         SaveDataController.I.AddTotalCount(KeyLogger.I.TodayCounts);
-        SaveManager.Save(SaveDataController.I.SaveData);
+        SaveManager.Save(SaveDataController.I.GetSaveData());
     }
 
     public static BmsTool I { get; private set; }
