@@ -1,2 +1,1 @@
-*.vb diff=sjis
-*.cs diff=sjis
+*.cs diff=utf-8-bom

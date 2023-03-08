@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -12,7 +12,7 @@ public class BmsTool : MonoBehaviour
 
     private void OnEnable()
     {
-        // json“Ç‚İ‚İˆ—
+        // jsonèª­ã¿è¾¼ã¿å‡¦ç†
         SaveData saveData = SaveManager.Load();
         if (saveData == null)
         {

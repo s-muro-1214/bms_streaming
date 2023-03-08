@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class RandomViewer : MonoBehaviour
 {
-    // ƒtƒ@ƒCƒ‹ŠÄ‹—p
+    // ãƒ•ã‚¡ã‚¤ãƒ«ç›£è¦–ç”¨
     private FileSystemWatcher _watcher;
     private DateTime _lastWriteTimeSave = DateTime.Now;
     private bool _isRandomChanged = false;
@@ -18,10 +18,10 @@ public class RandomViewer : MonoBehaviour
     private readonly List<Sprite> _sprites = new(8);
     private List<int> _randomPatterns = new(8);
 
-    // •\¦‚ÌXVŠÔŠu(•b)
+    // è¡¨ç¤ºã®æ›´æ–°é–“éš”(ç§’)
     private readonly float _span = 1.0f;
 
-    // ‰æ‘œ‚ğ•\¦‚·‚é‚Æ‚±
+    // ç”»åƒã‚’è¡¨ç¤ºã™ã‚‹ã¨ã“
     [SerializeField] private Image _lane1;
     [SerializeField] private Image _lane2;
     [SerializeField] private Image _lane3;
@@ -63,7 +63,7 @@ public class RandomViewer : MonoBehaviour
         StartCoroutine(DisplayRandomPatterns());
     }
 
-    // ƒtƒ@ƒCƒ‹‚ªì¬‚³‚ê‚½‚Æ‚«
+    // ãƒ•ã‚¡ã‚¤ãƒ«ãŒä½œæˆã•ã‚ŒãŸã¨ã
     private void Created(object sender, FileSystemEventArgs e)
     {
         using var fs = new StreamReader(e.FullPath, Encoding.GetEncoding("UTF-8"));
@@ -71,7 +71,7 @@ public class RandomViewer : MonoBehaviour
         _isRandomChanged = true;
     }
 
-    // ƒtƒ@ƒCƒ‹‚ªXV‚³‚ê‚½‚Æ‚«
+    // ãƒ•ã‚¡ã‚¤ãƒ«ãŒæ›´æ–°ã•ã‚ŒãŸã¨ã
     private void Changed(object sender, FileSystemEventArgs e)
     {
         var file = new FileInfo(e.FullPath);
@@ -84,10 +84,10 @@ public class RandomViewer : MonoBehaviour
         _isRandomChanged = true;
     }
 
-    // ƒtƒ@ƒCƒ‹‚ªíœ‚³‚ê‚½‚Æ‚«
+    // ãƒ•ã‚¡ã‚¤ãƒ«ãŒå‰Šé™¤ã•ã‚ŒãŸã¨ã
     private void Deleted(object sender, FileSystemEventArgs e)
     {
-        // –³’n‚Ì‰æ‘œ‚ğw’è
+        // ç„¡åœ°ã®ç”»åƒã‚’æŒ‡å®š
         _randomPatterns = new() { 8, 8, 8, 8, 8, 8, 8 };
         _isRandomChanged = true;
     }

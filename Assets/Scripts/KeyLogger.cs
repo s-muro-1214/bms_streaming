@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ï»¿using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyLogger : MonoBehaviour
@@ -22,9 +22,9 @@ public class KeyLogger : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        // TODO: beatoraja‚ÌState‚ªPLAY‚Ìê‡‚¾‚¯ƒJƒEƒ“ƒg
+        // TODO: beatorajaã®StateãŒPLAYã®å ´åˆã ã‘ã‚«ã‚¦ãƒ³ãƒˆ
 
-        // Œ®”Õ‚Ì‰ñ”ƒJƒEƒ“ƒg
+        // éµç›¤ã®å›æ•°ã‚«ã‚¦ãƒ³ãƒˆ
         for (int i = 0; i < 7; i++)
         {
             if (BmsTool.I.ButtonControls[i].isPressed)
@@ -42,8 +42,8 @@ public class KeyLogger : MonoBehaviour
             }
         }
 
-        // M‚Ì‰ñ”ƒJƒEƒ“ƒg
-        // ©•ª‚ÌŠÂ‹« -> ’èíó‘ÔF(-0.71,0.71)BŒv‰ñ‚èF(-0.01,1.00)B”½Œv‰ñ‚èF(0.00,1.00)‚Û‚¢
+        // çš¿ã®å›æ•°ã‚«ã‚¦ãƒ³ãƒˆ
+        // è‡ªåˆ†ã®ç’°å¢ƒ -> å®šå¸¸çŠ¶æ…‹ï¼š(-0.71,0.71)ã€‚æ™‚è¨ˆå›ã‚Šï¼š(-0.01,1.00)ã€‚åæ™‚è¨ˆå›ã‚Šï¼š(0.00,1.00)ã½ã„
         Vector2 currentScratchPos = BmsTool.I.Scratch.ReadValue();
         if (_oldScratchPos.x != currentScratchPos.x && currentScratchPos.y != _initScratchPos.y)
         {
@@ -51,8 +51,8 @@ public class KeyLogger : MonoBehaviour
             _oldScratchPos = currentScratchPos;
             TotalKeyPressed++;
 
-            // ¡“ú‚Ì‰ñ”ƒJƒEƒ“ƒg—p•ªŠò
-            if (currentScratchPos.x < 0.00f) // x‚ªƒ}ƒCƒiƒX‚Ìê‡‚ÍŒv‰ñ‚è(‚Ì‚Í‚¸)
+            // ä»Šæ—¥ã®å›æ•°ã‚«ã‚¦ãƒ³ãƒˆç”¨åˆ†å²
+            if (currentScratchPos.x < 0.00f) // xãŒãƒã‚¤ãƒŠã‚¹ã®å ´åˆã¯æ™‚è¨ˆå›ã‚Š(ã®ã¯ãš)
             {
                 TodayCounts[1] += 1;
                 Status[0] = false;
@@ -79,7 +79,7 @@ public class KeyLogger : MonoBehaviour
 
     public int TotalKeyPressed { get; set; }
 
-    // Œ®”Õ‚ÆM‚Ìó‘Ô•Û—p MªAM«A1`7‚Ì‡
+    // éµç›¤ã¨çš¿ã®çŠ¶æ…‹ä¿æŒç”¨ çš¿â†‘ã€çš¿â†“ã€1ï½7ã®é †
     public List<bool> Status { get; } = new(9)
     {
         false,
@@ -93,6 +93,6 @@ public class KeyLogger : MonoBehaviour
         false
     };
 
-    // ŠeŒ®”Õ‚ÆM‚Ì‘ÅŒ®‰ñ”(Today) MªAM«A1`7‚Ì‡
+    // å„éµç›¤ã¨çš¿ã®æ‰“éµå›æ•°(Today) çš¿â†‘ã€çš¿â†“ã€1ï½7ã®é †
     public List<int> TodayCounts { get; } = new(9) { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 }

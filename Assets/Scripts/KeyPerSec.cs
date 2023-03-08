@@ -1,11 +1,11 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class KeyPerSec : MonoBehaviour
 {
-    // •\¦‚ÌXVŠÔŠu(sec)
+    // è¡¨ç¤ºã®æ›´æ–°é–“éš”(sec)
     private readonly float _span = 1.0f;
 
     [SerializeField] private TextMeshProUGUI _kps;
