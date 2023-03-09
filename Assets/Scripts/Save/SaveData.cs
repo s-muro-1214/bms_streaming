@@ -1,33 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 [Serializable]
-public class Beatoraja
+public struct Beatoraja
 {
     public string directory;
 }
 
 [Serializable]
-public class BackgroundColor
-{
-    public byte red;
-    public byte green;
-    public byte blue;
-    public byte alpha;
-}
-
-[Serializable]
-public class DisplaySettings
+public struct DisplaySettings
 {
     public bool kps;
     public bool randomPattern;
     public bool counter;
-    public BackgroundColor color;
+    public Color32 color;
 }
 
 [Serializable]
-public class KeySettings
+public struct KeySettings
 {
     public string scratch;
     public string key1;
@@ -45,7 +36,7 @@ public class KeySettings
 }
 
 [Serializable]
-public class TotalCount
+public struct TotalCount
 {
     public int scratchL;
     public int scratchR;
@@ -64,29 +55,19 @@ public class TotalCount
 
     public int GetKeyCount(int index)
     {
-        switch (index)
+        return index switch
         {
-            case 0:
-                return scratchL;
-            case 1:
-                return scratchR;
-            case 2:
-                return key1;
-            case 3:
-                return key2;
-            case 4:
-                return key3;
-            case 5:
-                return key4;
-            case 6:
-                return key5;
-            case 7:
-                return key6;
-            case 8:
-                return key7;
-            default:
-                return 0;
-        }
+            0 => scratchL,
+            1 => scratchR,
+            2 => key1,
+            3 => key2,
+            4 => key3,
+            5 => key4,
+            6 => key5,
+            7 => key6,
+            8 => key7,
+            _ => 0,
+        };
     }
 }
 
@@ -111,13 +92,7 @@ public class SaveData
                 kps = true,
                 randomPattern = true,
                 counter = true,
-                color = new BackgroundColor()
-                {
-                    red = 0,
-                    green = 255,
-                    blue = 0,
-                    alpha = 255
-                }
+                color = Color.green
             },
             keySettings = new KeySettings()
             {

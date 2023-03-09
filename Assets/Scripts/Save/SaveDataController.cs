@@ -25,10 +25,7 @@ public class SaveDataController : MonoBehaviour
 
     public void SetCurrentBgColor(Color32 color)
     {
-        _saveData.displaySettings.color.red = color.r;
-        _saveData.displaySettings.color.green = color.g;
-        _saveData.displaySettings.color.blue = color.b;
-        _saveData.displaySettings.color.alpha = color.a;
+        _saveData.displaySettings.color = color;
     }
 
     public static SaveDataController I { get; private set; }
