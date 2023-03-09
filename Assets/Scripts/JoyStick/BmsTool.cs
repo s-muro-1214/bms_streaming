@@ -5,6 +5,12 @@ using UnityEngine.InputSystem.Controls;
 
 public class BmsTool : MonoBehaviour
 {
+    [SerializeField] private GameObject _kps;
+    [SerializeField] private GameObject _random;
+    [SerializeField] private GameObject _controller;
+    [SerializeField] private GameObject _counter;
+    [SerializeField] private GameObject _clock;
+
     private void Awake()
     {
         I = this;
@@ -16,7 +22,13 @@ public class BmsTool : MonoBehaviour
         SaveData saveData = SaveManager.Load();
         if (saveData == null)
         {
-            saveData = SaveData.Initialize();
+            Vector3 kps = _kps.transform.position;
+            Vector3 random = _random.transform.position;
+            Vector3 controller = _controller.transform.position;
+            Vector3 counter = _counter.transform.position;
+            Vector3 clock = _clock.transform.position;
+
+            saveData = SaveData.Initialize(kps, random, controller, counter, clock);
         }
 
         SaveDataController.I.SetSaveData(saveData);
@@ -24,6 +36,8 @@ public class BmsTool : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         if (Joystick.current == null)
         {
             return;

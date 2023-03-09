@@ -6,9 +6,9 @@ public class ColorSetting : MonoBehaviour
 {
     private readonly List<Color32> _colors = new()
     {
-        new Color32(0, 255, 0, 255),
-        new Color32(128, 128, 128, 255),
-        new Color32(0, 0, 0, 255)
+        Color.green,
+        Color.gray,
+        Color.black
     };
 
     private int _index = 0;
@@ -18,13 +18,13 @@ public class ColorSetting : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        BackgroundColor color = SaveDataController.I.GetDisplaySettings().color;
-        _renderer.color = new Color32(color.red, color.green, color.blue, color.alpha);
-        if (color.green == 255)
+        Color32 color = SaveDataController.I.GetDisplaySettings().backgroundColor;
+        _renderer.color = color;
+        if (color.g == 255)
         {
             _index = 0;
         }
-        else if (color.green == 128)
+        else if (color.g == 128)
         {
             _index = 1;
         }

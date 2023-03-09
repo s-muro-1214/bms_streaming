@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 [Serializable]
-public class Beatoraja
+public struct Beatoraja
 {
     public string directory;
 }
 
 [Serializable]
-public class BackgroundColor
+public struct UISetting
 {
-    public byte red;
-    public byte green;
-    public byte blue;
-    public byte alpha;
+    public bool isEnabled;
+    public Vector3 currentPosition;
 }
 
 [Serializable]
-public class DisplaySettings
+public struct DisplaySettings
 {
-    public bool kps;
-    public bool randomPattern;
-    public bool counter;
-    public BackgroundColor color;
+    public UISetting kps;
+    public UISetting randomPattern;
+    public UISetting controller;
+    public UISetting counter;
+    public UISetting clock;
+    public Color32 backgroundColor;
 }
 
 [Serializable]
-public class KeySettings
+public struct KeySettings
 {
     public string scratch;
     public string key1;
@@ -45,7 +45,7 @@ public class KeySettings
 }
 
 [Serializable]
-public class TotalCount
+public struct TotalCount
 {
     public int scratchL;
     public int scratchR;
@@ -64,29 +64,19 @@ public class TotalCount
 
     public int GetKeyCount(int index)
     {
-        switch (index)
+        return index switch
         {
-            case 0:
-                return scratchL;
-            case 1:
-                return scratchR;
-            case 2:
-                return key1;
-            case 3:
-                return key2;
-            case 4:
-                return key3;
-            case 5:
-                return key4;
-            case 6:
-                return key5;
-            case 7:
-                return key6;
-            case 8:
-                return key7;
-            default:
-                return 0;
-        }
+            0 => scratchL,
+            1 => scratchR,
+            2 => key1,
+            3 => key2,
+            4 => key3,
+            5 => key4,
+            6 => key5,
+            7 => key6,
+            8 => key7,
+            _ => 0,
+        };
     }
 }
 
@@ -98,7 +88,8 @@ public class SaveData
     public KeySettings keySettings;
     public TotalCount totalCount;
 
-    public static SaveData Initialize()
+    public static SaveData Initialize(Vector3 kps, Vector3 random, Vector3 controller, Vector3 counter,
+        Vector3 clock)
     {
         return new SaveData()
         {
@@ -108,16 +99,32 @@ public class SaveData
             },
             displaySettings = new DisplaySettings()
             {
-                kps = true,
-                randomPattern = true,
-                counter = true,
-                color = new BackgroundColor()
+                kps = new UISetting()
                 {
-                    red = 0,
-                    green = 255,
-                    blue = 0,
-                    alpha = 255
-                }
+                    isEnabled = true,
+                    currentPosition = kps
+                },
+                randomPattern = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = random
+                },
+                controller = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = controller
+                },
+                counter = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = counter
+                },
+                clock = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = clock
+                },
+                backgroundColor = Color.green
             },
             keySettings = new KeySettings()
             {
