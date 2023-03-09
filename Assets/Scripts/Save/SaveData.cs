@@ -9,12 +9,21 @@ public struct Beatoraja
 }
 
 [Serializable]
+public struct UISetting
+{
+    public bool isEnabled;
+    public Vector3 currentPosition;
+}
+
+[Serializable]
 public struct DisplaySettings
 {
-    public bool kps;
-    public bool randomPattern;
-    public bool counter;
-    public Color32 color;
+    public UISetting kps;
+    public UISetting randomPattern;
+    public UISetting controller;
+    public UISetting counter;
+    public UISetting clock;
+    public Color32 backgroundColor;
 }
 
 [Serializable]
@@ -79,7 +88,8 @@ public class SaveData
     public KeySettings keySettings;
     public TotalCount totalCount;
 
-    public static SaveData Initialize()
+    public static SaveData Initialize(Vector3 kps, Vector3 random, Vector3 controller, Vector3 counter,
+        Vector3 clock)
     {
         return new SaveData()
         {
@@ -89,10 +99,32 @@ public class SaveData
             },
             displaySettings = new DisplaySettings()
             {
-                kps = true,
-                randomPattern = true,
-                counter = true,
-                color = Color.green
+                kps = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = kps
+                },
+                randomPattern = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = random
+                },
+                controller = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = controller
+                },
+                counter = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = counter
+                },
+                clock = new UISetting()
+                {
+                    isEnabled = true,
+                    currentPosition = clock
+                },
+                backgroundColor = Color.green
             },
             keySettings = new KeySettings()
             {

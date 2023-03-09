@@ -25,7 +25,7 @@ public class SaveDataController : MonoBehaviour
 
     public void SetCurrentBgColor(Color32 color)
     {
-        _saveData.displaySettings.color = color;
+        _saveData.displaySettings.backgroundColor = color;
     }
 
     public static SaveDataController I { get; private set; }
@@ -38,6 +38,11 @@ public class SaveDataController : MonoBehaviour
     public DisplaySettings GetDisplaySettings()
     {
         return _saveData.displaySettings;
+    }
+
+    public void SetDisplaySettings(DisplaySettings settings)
+    {
+        _saveData.displaySettings = settings;
     }
 
     public KeySettings GetKeySettings()

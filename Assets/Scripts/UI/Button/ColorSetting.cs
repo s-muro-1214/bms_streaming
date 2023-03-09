@@ -13,13 +13,13 @@ public class ColorSetting : MonoBehaviour
 
     private int _index = 0;
 
-    [SerializeField] private Image _image;
+    [SerializeField] private SpriteRenderer _renderer;
 
     // Start is called before the first frame update
     private void Start()
     {
-        Color32 color = SaveDataController.I.GetDisplaySettings().color;
-        _image.color = color;
+        Color32 color = SaveDataController.I.GetDisplaySettings().backgroundColor;
+        _renderer.color = color;
         if (color.g == 255)
         {
             _index = 0;
@@ -42,7 +42,7 @@ public class ColorSetting : MonoBehaviour
             _index = 0;
         }
 
-        _image.color = _colors[_index];
+        _renderer.color = _colors[_index];
         SaveDataController.I.SetCurrentBgColor(_colors[_index]);
     }
 }
