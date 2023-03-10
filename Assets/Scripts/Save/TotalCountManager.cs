@@ -21,14 +21,14 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         ServiceLocator.Unregister<ITotalCountManager>(this);
     }
 
-    public TotalCount GetTotalCount()
+    public TotalCount GetSaveDataValue()
     {
         return _totalCount;
     }
 
-    public void SetTotalCount(TotalCount totalCount)
+    public void SetSaveDataValue(TotalCount settings)
     {
-        _totalCount = totalCount;
+        _totalCount = settings;
     }
 
     public long GetTotalSum()
@@ -69,12 +69,8 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
     }
 }
 
-public interface ITotalCountManager
+public interface ITotalCountManager : ISaveDataManager<TotalCount>
 {
-    public TotalCount GetTotalCount();
-
-    public void SetTotalCount(TotalCount totalCount);
-
     public long GetTotalSum();
 
     public int GetKeyCount(int index);

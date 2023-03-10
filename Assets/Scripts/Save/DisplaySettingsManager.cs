@@ -20,12 +20,12 @@ public class DisplaySettingsManager : MonoBehaviour, IDisplaySettingsManager
         ServiceLocator.Unregister<IDisplaySettingsManager>(this);
     }
 
-    public DisplaySettings GetDisplaySettings()
+    public DisplaySettings GetSaveDataValue()
     {
         return _settings;
     }
 
-    public void SetDisplaySettings(DisplaySettings settings)
+    public void SetSaveDataValue(DisplaySettings settings)
     {
         _settings = settings;
     }
@@ -91,12 +91,8 @@ public class DisplaySettingsManager : MonoBehaviour, IDisplaySettingsManager
     }
 }
 
-public interface IDisplaySettingsManager
+public interface IDisplaySettingsManager : ISaveDataManager<DisplaySettings>
 {
-    public DisplaySettings GetDisplaySettings();
-
-    public void SetDisplaySettings(DisplaySettings settings);
-
     public UISetting GetUISettingKPS();
 
     public void SetUISettingKPS(UISetting setting);

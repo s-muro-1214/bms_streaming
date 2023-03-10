@@ -21,12 +21,12 @@ public class KeySettingsManager : MonoBehaviour, IKeySettingsManager
         ServiceLocator.Unregister<IKeySettingsManager>(this);
     }
 
-    public KeySettings GetKeySettings()
+    public KeySettings GetSaveDataValue()
     {
         return _settings;
     }
 
-    public void SetKeySettings(KeySettings settings)
+    public void SetSaveDataValue(KeySettings settings)
     {
         _settings = settings;
     }
@@ -51,12 +51,8 @@ public class KeySettingsManager : MonoBehaviour, IKeySettingsManager
     }
 }
 
-public interface IKeySettingsManager
+public interface IKeySettingsManager : ISaveDataManager<KeySettings>
 {
-    public KeySettings GetKeySettings();
-
-    public void SetKeySettings(KeySettings settings);
-
     public List<string> GetButtonSettings();
 
     public string GetScratchName();

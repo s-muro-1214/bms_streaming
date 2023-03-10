@@ -20,14 +20,14 @@ public class BeatorajaManager : MonoBehaviour, IBeatorajaManager
         ServiceLocator.Unregister<IBeatorajaManager>(this);
     }
 
-    public Beatoraja GetBeatoraja()
+    public Beatoraja GetSaveDataValue()
     {
         return _beatoraja;
     }
 
-    public void SetBeatoraja(Beatoraja beatoraja)
+    public void SetSaveDataValue(Beatoraja settings)
     {
-        _beatoraja = beatoraja;
+        _beatoraja = settings;
     }
 
     public string GetBeatorajaDirectory()
@@ -36,11 +36,7 @@ public class BeatorajaManager : MonoBehaviour, IBeatorajaManager
     }
 }
 
-public interface IBeatorajaManager
+public interface IBeatorajaManager : ISaveDataManager<Beatoraja>
 {
-    public Beatoraja GetBeatoraja();
-
-    public void SetBeatoraja(Beatoraja beatoraja);
-
     public string GetBeatorajaDirectory();
 }

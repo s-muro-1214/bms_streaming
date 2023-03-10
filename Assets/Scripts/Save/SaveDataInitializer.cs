@@ -24,16 +24,16 @@ public class SaveDataInitializer : MonoBehaviour
         }
 
         IBeatorajaManager beatorajaManager = ServiceLocator.GetInstance<IBeatorajaManager>();
-        beatorajaManager.SetBeatoraja(saveData.beatoraja);
+        beatorajaManager.SetSaveDataValue(saveData.beatoraja);
 
         IDisplaySettingsManager displaySettingsManager = ServiceLocator.GetInstance<IDisplaySettingsManager>();
-        displaySettingsManager.SetDisplaySettings(saveData.displaySettings);
+        displaySettingsManager.SetSaveDataValue(saveData.displaySettings);
 
         IKeySettingsManager keySettingsManager = ServiceLocator.GetInstance<IKeySettingsManager>();
-        keySettingsManager.SetKeySettings(saveData.keySettings);
+        keySettingsManager.SetSaveDataValue(saveData.keySettings);
 
         ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
-        totalCountManager.SetTotalCount(saveData.totalCount);
+        totalCountManager.SetSaveDataValue(saveData.totalCount);
 
         BeatorajaWatcher.Init();
     }
@@ -43,18 +43,18 @@ public class SaveDataInitializer : MonoBehaviour
         var saveData = SaveData.New();
 
         IBeatorajaManager beatorajaManager = ServiceLocator.GetInstance<IBeatorajaManager>();
-        saveData.beatoraja = beatorajaManager.GetBeatoraja();
+        saveData.beatoraja = beatorajaManager.GetSaveDataValue();
 
         IDisplaySettingsManager displaySettingsManager = ServiceLocator.GetInstance<IDisplaySettingsManager>();
-        saveData.displaySettings = displaySettingsManager.GetDisplaySettings();
+        saveData.displaySettings = displaySettingsManager.GetSaveDataValue();
 
         IKeySettingsManager keySettingsManager = ServiceLocator.GetInstance<IKeySettingsManager>();
-        saveData.keySettings = keySettingsManager.GetKeySettings();
+        saveData.keySettings = keySettingsManager.GetSaveDataValue();
 
         ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
         IKeyCountManager keyCountManager = ServiceLocator.GetInstance<IKeyCountManager>();
         totalCountManager.AddTotalCount(keyCountManager.GetAllKeyCountToday());
-        saveData.totalCount = totalCountManager.GetTotalCount();
+        saveData.totalCount = totalCountManager.GetSaveDataValue();
 
         SaveDataService.Save(saveData);
     }

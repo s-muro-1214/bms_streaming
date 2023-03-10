@@ -117,7 +117,7 @@ public class KeyCountManager : MonoBehaviour, IKeyCountManager
 
     public List<int> GetAllKeyCountToday()
     {
-        List<int> todayCounts = new();
+        List<int> todayCounts = new(_joystickStatusPairs.Count);
 
         var scratchStatus = (ScratchStatus)_joystickStatusPairs[Joysticks.Scratch];
         todayCounts.Add(scratchStatus.CountL);
@@ -139,7 +139,7 @@ public class KeyCountManager : MonoBehaviour, IKeyCountManager
 
     public List<bool> GetAllKeyStatus()
     {
-        List<bool> allKeyStatus = new();
+        List<bool> allKeyStatus = new(_joystickStatusPairs.Count);
 
         var scratchStatus = (ScratchStatus)_joystickStatusPairs[Joysticks.Scratch];
         allKeyStatus.Add(scratchStatus.IsScratchLRotated);
