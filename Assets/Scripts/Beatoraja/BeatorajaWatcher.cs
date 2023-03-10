@@ -5,21 +5,18 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class BeatorajaWatcher : MonoBehaviour
+public static class BeatorajaWatcher
 {
-    // ファイル監視用
-    private FileSystemWatcher _watcher;
-    private DateTime _lastWriteTimeSave = DateTime.Now;
-    private readonly string _randomFile = "current_random.txt";
-    private readonly string _stateFile = "current_state.txt";
+    private static FileSystemWatcher _watcher;
+    private static DateTime _lastWriteTimeSave = DateTime.Now;
+    private static readonly string _randomFile = "current_random.txt";
+    private static readonly string _stateFile = "current_state.txt";
 
-    private void Awake()
-    {
-        I = this;
-    }
+    private static List<int> _randomPatterns = new();
+    private static bool _isRandomChanged = false;
+    private static BeatorajaState _state = BeatorajaState.NONE;
 
-    // Start is called before the first frame update
-    private void Start()
+    public static void Init()
     {
         _watcher = new FileSystemWatcher(SaveDataController.I.GetBeatoraja().directory)
         {
@@ -35,22 +32,22 @@ public class BeatorajaWatcher : MonoBehaviour
     }
 
     // ファイルが作成されたとき
-    private void Created(object sender, FileSystemEventArgs e)
+    private static void Created(object sender, FileSystemEventArgs e)
     {
         using var fs = new StreamReader(e.FullPath, Encoding.GetEncoding("UTF-8"));
         if (_randomFile.Equals(e.Name))
         {
-            RandomPatterns = fs.ReadLine().Split(',').Select(int.Parse).ToList();
-            IsRandomChanged = true;
+            _randomPatterns = fs.ReadLine().Split(',').Select(int.Parse).ToList();
+            _isRandomChanged = true;
         }
         else if (_stateFile.Equals(e.Name))
         {
-            State = fs.ReadLine();
+            Enum.TryParse<BeatorajaState>(fs.ReadLine(), out _state);
         }
     }
 
     // ファイルが更新されたとき
-    private void Changed(object sender, FileSystemEventArgs e)
+    private static void Changed(object sender, FileSystemEventArgs e)
     {
         var file = new FileInfo(e.FullPath);
 
@@ -60,35 +57,47 @@ public class BeatorajaWatcher : MonoBehaviour
         using var fs = new StreamReader(e.FullPath, Encoding.GetEncoding("UTF-8"));
         if (_randomFile.Equals(e.Name))
         {
-            RandomPatterns = fs.ReadLine().Split(',').Select(int.Parse).ToList();
-            IsRandomChanged = true;
+            _randomPatterns = fs.ReadLine().Split(',').Select(int.Parse).ToList();
+            _isRandomChanged = true;
         }
         else if (_stateFile.Equals(e.Name))
         {
-            State = fs.ReadLine();
+            Enum.TryParse<BeatorajaState>(fs.ReadLine(), out _state);
         }
     }
 
     // ファイルが削除されたとき
-    private void Deleted(object sender, FileSystemEventArgs e)
+    private static void Deleted(object sender, FileSystemEventArgs e)
     {
         if (_randomFile.Equals(e.Name))
         {
             // 無地の画像を指定
-            RandomPatterns = new() { 8, 8, 8, 8, 8, 8, 8 };
-            IsRandomChanged = true;
+            _randomPatterns = new() { 8, 8, 8, 8, 8, 8, 8 };
+            _isRandomChanged = true;
         }
         else if (_stateFile.Equals(e.Name))
         {
-            State = "";
+            _state = BeatorajaState.NONE;
         }
     }
 
-    public static BeatorajaWatcher I { get; private set; }
+    public static List<int> GetRandomPatterns()
+    {
+        return _randomPatterns;
+    }
 
-    public List<int> RandomPatterns { get; private set; } = new(8);
+    public static bool IsRandomChanged()
+    {
+        return _isRandomChanged;
+    }
 
-    public bool IsRandomChanged { get; set; } = false;
+    public static void ResetRandomChanged()
+    {
+        _isRandomChanged = false;
+    }
 
-    public string State { get; private set; } = "";
+    public static BeatorajaState GetState()
+    {
+        return _state;
+    }
 }
