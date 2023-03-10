@@ -463,4 +463,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
+# voicevox
+/[Aa]ssets/SE/*.wav
+
 # End of https://www.toptal.com/developers/gitignore/api/csharp,unity,visualstudio
