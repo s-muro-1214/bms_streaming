@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-public static class SaveManager
+public static class SaveDataService
 {
     private static string SaveDataPath()
     {

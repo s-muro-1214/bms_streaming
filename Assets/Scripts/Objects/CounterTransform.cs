@@ -4,14 +4,14 @@ public class CounterTransform : ObjectTransform
 {
     protected override Vector3 GetInitialPosition()
     {
-        return SaveDataController.I.GetDisplaySettings().counter.currentPosition;
+        return _manager.GetUISettingCounter().currentPosition;
     }
 
     protected override void SetCurrentPosition()
     {
-        DisplaySettings settings = SaveDataController.I.GetDisplaySettings();
-        settings.counter.currentPosition = transform.position;
+        UISetting setting = _manager.GetUISettingCounter();
+        setting.currentPosition = transform.position;
 
-        SaveDataController.I.SetDisplaySettings(settings);
+        _manager.SetUISettingCounter(setting);
     }
 }

@@ -4,14 +4,14 @@ public class ClockTransform : ObjectTransform
 {
     protected override Vector3 GetInitialPosition()
     {
-        return SaveDataController.I.GetDisplaySettings().clock.currentPosition;
+        return _manager.GetUISettingClock().currentPosition;
     }
 
     protected override void SetCurrentPosition()
     {
-        DisplaySettings settings = SaveDataController.I.GetDisplaySettings();
-        settings.clock.currentPosition = transform.position;
+        UISetting setting = _manager.GetUISettingClock();
+        setting.currentPosition = transform.position;
 
-        SaveDataController.I.SetDisplaySettings(settings);
+        _manager.SetUISettingClock(setting);
     }
 }

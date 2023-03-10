@@ -28,7 +28,8 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     private void OnGUI()
     {
-        List<bool> status = KeyLogger.I.Status;
+        IKeyCountManager manager = ServiceLocator.GetInstance<IKeyCountManager>();
+        List<bool> status = manager.GetAllKeyStatus();
 
         _scratchL.material = status[0] ? _matPressed : _matReleased;
         _scratchR.material = status[1] ? _matPressed : _matReleased;
