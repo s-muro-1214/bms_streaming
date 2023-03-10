@@ -22,7 +22,7 @@ public class KeyPerSec : MonoBehaviour
 
     private void Update()
     {
-        if (!BeatorajaWatcher.I.State.Equals("PLAY"))
+        if (BeatorajaWatcher.GetState() != BeatorajaState.PLAY)
         {
             _maxValue = 0;
             _barMax = 1;

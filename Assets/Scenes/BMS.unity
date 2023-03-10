@@ -341,7 +341,6 @@ GameObject:
   - component: {fileID: 477122909}
   - component: {fileID: 477122907}
   - component: {fileID: 477122908}
-  - component: {fileID: 477122910}
   m_Layer: 5
   m_Name: BMSTool
   m_TagString: Untagged
@@ -408,18 +407,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf7bc326b2949584281cda755bcd68bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &477122910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 477122905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d700550dc886d442a5b2c764f78832b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &561097530
@@ -836,7 +823,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

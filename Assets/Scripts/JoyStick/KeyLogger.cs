@@ -22,7 +22,7 @@ public class KeyLogger : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!BeatorajaWatcher.I.State.Equals("PLAY"))
+        if (BeatorajaWatcher.GetState() != BeatorajaState.PLAY)
         {
             return;
         }

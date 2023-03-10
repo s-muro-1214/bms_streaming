@@ -32,6 +32,8 @@ public class BmsTool : MonoBehaviour
         }
 
         SaveDataController.I.SetSaveData(saveData);
+
+        BeatorajaWatcher.Init();
     }
 
     private void Start()
