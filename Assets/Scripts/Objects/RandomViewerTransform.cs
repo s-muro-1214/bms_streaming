@@ -4,14 +4,14 @@ public class RandomViewerTransform : ObjectTransform
 {
     protected override Vector3 GetInitialPosition()
     {
-        return SaveDataController.I.GetDisplaySettings().randomPattern.currentPosition;
+        return _manager.GetUISettingRandom().currentPosition;
     }
 
     protected override void SetCurrentPosition()
     {
-        DisplaySettings settings = SaveDataController.I.GetDisplaySettings();
-        settings.randomPattern.currentPosition = transform.position;
+        UISetting setting = _manager.GetUISettingRandom();
+        setting.currentPosition = transform.position;
 
-        SaveDataController.I.SetDisplaySettings(settings);
+        _manager.SetUISettingRandom(setting);
     }
 }

@@ -18,7 +18,8 @@ public static class BeatorajaWatcher
 
     public static void Init()
     {
-        _watcher = new FileSystemWatcher(SaveDataController.I.GetBeatoraja().directory)
+        IBeatorajaManager manager = ServiceLocator.GetInstance<IBeatorajaManager>();
+        _watcher = new FileSystemWatcher(manager.GetBeatorajaDirectory())
         {
             Filter = "*.txt",
             NotifyFilter = NotifyFilters.LastWrite,

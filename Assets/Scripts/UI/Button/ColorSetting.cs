@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ColorSetting : MonoBehaviour
 {
@@ -18,7 +17,8 @@ public class ColorSetting : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Color32 color = SaveDataController.I.GetDisplaySettings().backgroundColor;
+        IDisplaySettingsManager manager = ServiceLocator.GetInstance<IDisplaySettingsManager>();
+        Color32 color = manager.GetBackgroundColor();
         _renderer.color = color;
         if (color.g == 255)
         {
@@ -37,12 +37,14 @@ public class ColorSetting : MonoBehaviour
     public void SwitchBgColor()
     {
         _index++;
-        if(_index >= _colors.Count)
+        if (_index >= _colors.Count)
         {
             _index = 0;
         }
 
         _renderer.color = _colors[_index];
-        SaveDataController.I.SetCurrentBgColor(_colors[_index]);
+
+        IDisplaySettingsManager manager = ServiceLocator.GetInstance<IDisplaySettingsManager>();
+        manager.SetBackgroundColor(_colors[_index]);
     }
 }

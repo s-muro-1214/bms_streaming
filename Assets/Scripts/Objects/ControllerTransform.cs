@@ -4,14 +4,14 @@ public class ControllerTransform : ObjectTransform
 {
     protected override Vector3 GetInitialPosition()
     {
-        return SaveDataController.I.GetDisplaySettings().controller.currentPosition;
+        return _manager.GetUISettingController().currentPosition;
     }
 
     protected override void SetCurrentPosition()
     {
-        DisplaySettings settings = SaveDataController.I.GetDisplaySettings();
-        settings.controller.currentPosition = transform.position;
+        UISetting setting = _manager.GetUISettingController();
+        setting.currentPosition = transform.position;
 
-        SaveDataController.I.SetDisplaySettings(settings);
+        _manager.SetUISettingController(setting);
     }
 }

@@ -41,8 +41,10 @@ public class DisplayKeyCount : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        ITotalCountManager manager = ServiceLocator.GetInstance<ITotalCountManager>();
+
         _isEntered = true;
-        _count.text = $"COUNT: {SaveDataController.I.GetTotalCount().GetKeyCount(_index)}";
+        _count.text = $"COUNT: {manager.GetKeyCount(_index)}";
         _count.gameObject.SetActive(true);
     }
 

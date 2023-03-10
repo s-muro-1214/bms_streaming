@@ -7,12 +7,15 @@ public abstract class ObjectTransform : MonoBehaviour
     private Vector3 _screenPoint;
     private Vector3 _offset;
 
+    protected IDisplaySettingsManager _manager;
+
     protected abstract Vector3 GetInitialPosition();
 
     protected abstract void SetCurrentPosition();
 
     private void Start()
     {
+        _manager = ServiceLocator.GetInstance<IDisplaySettingsManager>();
         transform.position = GetInitialPosition();
     }
 

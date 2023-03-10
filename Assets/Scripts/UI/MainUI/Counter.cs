@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-
     [SerializeField] private TextMeshProUGUI _total;
     [SerializeField] private TextMeshProUGUI _today;
     [SerializeField] private TextMeshProUGUI _density;
@@ -13,7 +11,8 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        long totalCount = SaveDataController.I.GetTotalCount().GetTotalSum();
+        ITotalCountManager manager = ServiceLocator.GetInstance<ITotalCountManager>();
+        long totalCount = manager.GetTotalSum();
 
         _total.text = totalCount.ToString();
         _today.text = "0";
@@ -23,9 +22,14 @@ public class Counter : MonoBehaviour
     // Update is called once per frame
     private void OnGUI()
     {
-        int todayCount = KeyLogger.I.TodayCounts.Sum();
-        long totalCount = SaveDataController.I.GetTotalCount().GetTotalSum() + todayCount;
-        double density = Math.Round(todayCount / KeyLogger.I.PlayTime, 1, MidpointRounding.AwayFromZero);
+        IKeyCountManager keyCountManager = ServiceLocator.GetInstance<IKeyCountManager>();
+        ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
+        IPlayTimeManager playTimeManager = ServiceLocator.GetInstance<IPlayTimeManager>();
+
+        int todayCount = keyCountManager.GetTodayCountSum();
+        long totalCount = totalCountManager.GetTotalSum() + todayCount;
+        double density = Math.Round(todayCount / playTimeManager.GetPlayTime(), 1,
+            MidpointRounding.AwayFromZero);
 
         if (Double.IsNaN(density))
         {

@@ -4,14 +4,14 @@ public class KPSTransform : ObjectTransform
 {
     protected override Vector3 GetInitialPosition()
     {
-        return SaveDataController.I.GetDisplaySettings().kps.currentPosition;
+        return _manager.GetUISettingKPS().currentPosition;
     }
 
     protected override void SetCurrentPosition()
     {
-        DisplaySettings settings = SaveDataController.I.GetDisplaySettings();
-        settings.kps.currentPosition = transform.position;
+        UISetting setting = _manager.GetUISettingKPS();
+        setting.currentPosition = transform.position;
 
-        SaveDataController.I.SetDisplaySettings(settings);
+        _manager.SetUISettingKPS(setting);
     }
 }

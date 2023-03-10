@@ -36,7 +36,9 @@ public class KeyPerSec : MonoBehaviour
         {
             yield return new WaitForSeconds(_span);
 
-            int kps = KeyLogger.I.TotalKeyPressed;
+            IKeyCountManager manager = ServiceLocator.GetInstance<IKeyCountManager>();
+
+            int kps = manager.GetTotalKeyPressedCount();
             _kpsCurrent.text = kps.ToString();
 
             float percentage;
@@ -50,7 +52,7 @@ public class KeyPerSec : MonoBehaviour
             }
             _renderer.material.SetFloat("_Fillpercentage", percentage);
 
-            KeyLogger.I.TotalKeyPressed = 0;
+            manager.ResetTotalKeyPressedCount();
 
             if (kps > _maxValue)
             {
