@@ -14,6 +14,8 @@ public class Clock : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        UpdateDateTime();
+
         StartCoroutine(DisplayClock());
     }
 
@@ -23,8 +25,13 @@ public class Clock : MonoBehaviour
         {
             yield return new WaitForSeconds(_span);
 
-            _date.text = DateTime.Now.ToString("yyyy/MM/dd");
-            _time.text = DateTime.Now.ToString("HH:mm");
+            UpdateDateTime();
         }
+    }
+
+    private void UpdateDateTime()
+    {
+        _date.text = DateTime.Now.ToString("yyyy/MM/dd");
+        _time.text = DateTime.Now.ToString("HH:mm");
     }
 }
