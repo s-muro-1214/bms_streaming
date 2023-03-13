@@ -11,12 +11,7 @@ public class Counter : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        ITotalCountManager manager = ServiceLocator.GetInstance<ITotalCountManager>();
-        long totalCount = manager.GetTotalSum();
-
-        _total.text = totalCount.ToString();
-        _today.text = "0";
-        _density.text = "0.0";
+        InitializeText();
     }
 
     // Update is called once per frame
@@ -25,6 +20,12 @@ public class Counter : MonoBehaviour
         IKeyCountManager keyCountManager = ServiceLocator.GetInstance<IKeyCountManager>();
         ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
         IPlayTimeManager playTimeManager = ServiceLocator.GetInstance<IPlayTimeManager>();
+
+        if(totalCountManager.IsTotalCountLoading())
+        {
+            InitializeText();
+            return;
+        }
 
         int todayCount = keyCountManager.GetTodayCountSum();
         long totalCount = totalCountManager.GetTotalSum() + todayCount;
@@ -39,5 +40,12 @@ public class Counter : MonoBehaviour
         _total.text = totalCount.ToString();
         _today.text = todayCount.ToString();
         _density.text = density.ToString("F1");
+    }
+
+    private void InitializeText()
+    {
+        _total.text = "NOW LOADING...";
+        _today.text = "0";
+        _density.text = "0.0";
     }
 }
