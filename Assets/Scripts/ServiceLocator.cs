@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public static class ServiceLocator
@@ -10,6 +11,8 @@ public static class ServiceLocator
     private static void Initialize()
     {
         Application.targetFrameRate = 60;
+        NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
+
         _instances.Clear();
     }
 

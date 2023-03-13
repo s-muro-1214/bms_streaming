@@ -5,6 +5,7 @@ using UnityEngine;
 public class Beatoraja
 {
     public string directory = "D:/beatoraja0.8.4-jre-win64";
+    public int webSocketPort = 30127;
 }
 
 [Serializable]
@@ -61,46 +62,24 @@ public class KeySettings
     public string key7 = "button7";
 }
 
-[Serializable]
-public class TotalCount
-{
-    public int scratchL = 0;
-    public int scratchR = 0;
-    public int key1 = 0;
-    public int key2 = 0;
-    public int key3 = 0;
-    public int key4 = 0;
-    public int key5 = 0;
-    public int key6 = 0;
-    public int key7 = 0;
-}
 
 [Serializable]
 public class SaveData
 {
+    public string uuid;
     public Beatoraja beatoraja;
     public DisplaySettings displaySettings;
     public KeySettings keySettings;
     public TotalCount totalCount;
 
-    public static SaveData Initialize(Vector3 kps, Vector3 random, Vector3 controller, Vector3 counter,
+    public static SaveData Initialize(string uuid, Vector3 kps, Vector3 random, Vector3 controller, Vector3 counter,
         Vector3 clock)
     {
         return new SaveData()
         {
+            uuid = uuid,
             beatoraja = new Beatoraja(),
             displaySettings = new DisplaySettings(kps, random, controller, counter, clock),
-            keySettings = new KeySettings(),
-            totalCount = new TotalCount()
-        };
-    }
-
-    public static SaveData New()
-    {
-        return new SaveData()
-        {
-            beatoraja = new Beatoraja(),
-            displaySettings = new DisplaySettings(),
             keySettings = new KeySettings(),
             totalCount = new TotalCount()
         };

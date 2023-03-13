@@ -34,9 +34,16 @@ public class BeatorajaManager : MonoBehaviour, IBeatorajaManager
     {
         return _beatoraja.directory;
     }
+
+    public int GetWebSocketPort()
+    {
+        return _beatoraja.webSocketPort;
+    }
 }
 
 public interface IBeatorajaManager : ISaveDataManager<Beatoraja>
 {
     public string GetBeatorajaDirectory();
+
+    public int GetWebSocketPort();
 }

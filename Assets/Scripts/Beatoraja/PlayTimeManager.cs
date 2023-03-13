@@ -18,7 +18,7 @@ public class PlayTimeManager : MonoBehaviour, IPlayTimeManager
     // Update is called once per frame
     private void Update()
     {
-        if (BeatorajaWatcher.GetState() != BeatorajaState.PLAY)
+        if (StateService.GetState() != BeatorajaState.PLAY)
         {
             return;
         }
