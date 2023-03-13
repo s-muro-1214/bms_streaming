@@ -468,12 +468,14 @@ crashlytics-build.properties
 /[Aa]ssets/PostProcessing/
 /[Aa]ssets/TextMesh Pro/
 /[Aa]ssets/Thaleah_PixelFont/
+/[Aa]ssets/AddressableAssetsData/link.xml
 
 # ignore assets meta
 /[Aa]ssets/AdultLink.meta
 /[Aa]ssets/PostProcessing.meta
 /[Aa]ssets/TextMesh Pro.meta
 /[Aa]ssets/Thaleah_PixelFont.meta
+/[Aa]ssets/AddressableAssetsData/link.xml.meta
 
 
 # End of https://www.toptal.com/developers/gitignore/api/csharp,unity,visualstudio
