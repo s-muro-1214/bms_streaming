@@ -469,6 +469,7 @@ crashlytics-build.properties
 /[Aa]ssets/TextMesh Pro/
 /[Aa]ssets/Thaleah_PixelFont/
 /[Aa]ssets/AddressableAssetsData/link.xml
+/[Aa]ssets/Scripts/Configuration.*
 
 # ignore assets meta
 /[Aa]ssets/AdultLink.meta
