@@ -80,6 +80,7 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
     private IEnumerator LoadTotalCountFromDB(string uuid)
     {
         WWWForm form = new();
+        form.AddField("token", Configuration.TOKEN);
         form.AddField("uuid", uuid);
 
         using var request = UnityWebRequest.Post($"{_baseUri}/load.php", form);
@@ -101,6 +102,7 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
     private IEnumerator SaveTotalCountToDB(string uuid)
     {
         WWWForm form = new();
+        form.AddField("token", Configuration.TOKEN);
         form.AddField("uuid", uuid);
         form.AddField("scratchL", _totalCount.scratchL);
         form.AddField("scratchR", _totalCount.scratchR);
