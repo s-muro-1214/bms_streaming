@@ -13,7 +13,6 @@ public class RandomPatternService : WebSocketBehavior
 
     protected override void OnMessage(MessageEventArgs e)
     {
-        Debug.Log($"RandomPatternService message -> {e.Data}");
         _randomPatterns = e.Data.Split(',').Select(int.Parse).ToList();
         _isRandomChanged = true;
     }
