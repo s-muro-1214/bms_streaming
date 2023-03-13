@@ -5,6 +5,7 @@ using UnityEngine;
 public class Beatoraja
 {
     public string directory = "D:/beatoraja0.8.4-jre-win64";
+    public int webSocketPort = 30127;
 }
 
 [Serializable]

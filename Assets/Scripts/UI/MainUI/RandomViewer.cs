@@ -59,9 +59,9 @@ public class RandomViewer : MonoBehaviour
         {
             yield return new WaitForSeconds(_span);
 
-            if (BeatorajaWatcher.IsRandomChanged())
+            if (RandomPatternService.IsRandomChanged())
             {
-                List<int> randomPatterns = BeatorajaWatcher.GetRandomPatterns();
+                List<int> randomPatterns = RandomPatternService.GetRandomPatterns();
 
                 _lane1.sprite = _sprites[randomPatterns[0] - 1];
                 _lane2.sprite = _sprites[randomPatterns[1] - 1];
@@ -70,7 +70,7 @@ public class RandomViewer : MonoBehaviour
                 _lane5.sprite = _sprites[randomPatterns[4] - 1];
                 _lane6.sprite = _sprites[randomPatterns[5] - 1];
                 _lane7.sprite = _sprites[randomPatterns[6] - 1];
-                BeatorajaWatcher.ResetRandomChanged();
+                RandomPatternService.ResetRandomChanged();
 
                 PlayWav(randomPatterns);
             }

@@ -34,8 +34,6 @@ public class SaveDataInitializer : MonoBehaviour
 
         ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
         totalCountManager.SetSaveDataValue(saveData.totalCount);
-
-        BeatorajaWatcher.Init();
     }
 
     private void OnApplicationQuit()
