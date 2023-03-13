@@ -11,7 +11,6 @@ public class StateService : WebSocketBehavior
 
     protected override void OnMessage(MessageEventArgs e)
     {
-        Debug.Log($"StateService message -> {e.Data}");
         Enum.TryParse<BeatorajaState>(e.Data, out _state);
     }
 
