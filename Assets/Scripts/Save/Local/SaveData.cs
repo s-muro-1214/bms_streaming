@@ -70,7 +70,6 @@ public class SaveData
     public Beatoraja beatoraja;
     public DisplaySettings displaySettings;
     public KeySettings keySettings;
-    public TotalCount totalCount;
 
     public static SaveData Initialize(string uuid, Vector3 kps, Vector3 random, Vector3 controller, Vector3 counter,
         Vector3 clock)
@@ -80,8 +79,7 @@ public class SaveData
             uuid = uuid,
             beatoraja = new Beatoraja(),
             displaySettings = new DisplaySettings(kps, random, controller, counter, clock),
-            keySettings = new KeySettings(),
-            totalCount = new TotalCount()
+            keySettings = new KeySettings()
         };
     }
 }
