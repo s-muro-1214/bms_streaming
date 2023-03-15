@@ -10,8 +10,7 @@ public static class ServiceLocator
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void Initialize()
     {
-        Application.targetFrameRate = 60;
-        NativeLeakDetection.Mode = NativeLeakDetectionMode.EnabledWithStackTrace;
+        ToolInitializer.Init();
 
         _instances.Clear();
     }
