@@ -37,7 +37,7 @@ public class SaveDataInitializer : MonoBehaviour
         keySettingsManager.SetSaveDataValue(_saveData.keySettings);
 
         ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
-        totalCountManager.LoadTotalCount(_saveData.uuid);
+        totalCountManager.LoadTotalCountAndSetUUID(_saveData.uuid);
     }
 
     private void OnApplicationQuit()
@@ -50,10 +50,6 @@ public class SaveDataInitializer : MonoBehaviour
 
         IKeySettingsManager keySettingsManager = ServiceLocator.GetInstance<IKeySettingsManager>();
         _saveData.keySettings = keySettingsManager.GetSaveDataValue();
-
-        ITotalCountManager totalCountManager = ServiceLocator.GetInstance<ITotalCountManager>();
-        IKeyCountManager keyCountManager = ServiceLocator.GetInstance<IKeyCountManager>();
-        totalCountManager.SaveTotalCount(_saveData.uuid, keyCountManager.GetAllKeyCountToday());
 
         SaveDataService.Save(_saveData);
     }
