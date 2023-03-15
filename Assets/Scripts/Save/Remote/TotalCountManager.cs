@@ -8,6 +8,8 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
     private static readonly string _baseUri = "https://izuna.net/db_supporter/savedata";
 
     private TotalCount _totalCount;
+    private string _uuid;
+    private bool _isAlreadySaved = false;
 
     private void Awake()
     {
@@ -20,21 +22,34 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         ServiceLocator.Register<ITotalCountManager>(this);
     }
 
+    private void Update()
+    {
+        if(StateService.CurrentState == BeatorajaState.RESULT && !_isAlreadySaved)
+        {
+            IKeyCountManager keyCountManager = ServiceLocator.GetInstance<IKeyCountManager>();
+            SaveTotalCount(keyCountManager.GetAllKeyCountToday());
+            _isAlreadySaved = true;
+        }
+        else if (StateService.CurrentState != BeatorajaState.RESULT)
+        {
+            _isAlreadySaved = false;
+        }
+    }
+
     private void OnDestroy()
     {
         ServiceLocator.Unregister<ITotalCountManager>(this);
     }
 
-    public void LoadTotalCount(string uuid)
+    public void LoadTotalCountAndSetUUID(string uuid)
     {
-        StartCoroutine(LoadTotalCountFromDB(uuid));
+        _uuid = uuid;
+        StartCoroutine(LoadTotalCountFromDB());
     }
 
-    public void SaveTotalCount(string uuid, List<int> todayCounts)
+    public void SaveTotalCount(List<int> todayCounts)
     {
-        AddTotalCount(todayCounts);
-
-        StartCoroutine(SaveTotalCountToDB(uuid));
+        StartCoroutine(SaveTotalCountToDB(todayCounts));
     }
 
     public long GetTotalSum()
@@ -77,11 +92,11 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         _totalCount.key7 += todayCounts[8];
     }
 
-    private IEnumerator LoadTotalCountFromDB(string uuid)
+    private IEnumerator LoadTotalCountFromDB()
     {
         WWWForm form = new();
         form.AddField("token", Configuration.TOKEN);
-        form.AddField("uuid", uuid);
+        form.AddField("uuid", _uuid);
 
         using var request = UnityWebRequest.Post($"{_baseUri}/load.php", form);
         yield return request.SendWebRequest();
@@ -99,20 +114,20 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         request.Dispose();
     }
 
-    private IEnumerator SaveTotalCountToDB(string uuid)
+    private IEnumerator SaveTotalCountToDB(List<int> todayCounts)
     {
         WWWForm form = new();
         form.AddField("token", Configuration.TOKEN);
-        form.AddField("uuid", uuid);
-        form.AddField("scratchL", _totalCount.scratchL);
-        form.AddField("scratchR", _totalCount.scratchR);
-        form.AddField("key1", _totalCount.key1);
-        form.AddField("key2", _totalCount.key2);
-        form.AddField("key3", _totalCount.key3);
-        form.AddField("key4", _totalCount.key4);
-        form.AddField("key5", _totalCount.key5);
-        form.AddField("key6", _totalCount.key6);
-        form.AddField("key7", _totalCount.key7);
+        form.AddField("uuid", _uuid);
+        form.AddField("scratchL", _totalCount.scratchL + todayCounts[0]);
+        form.AddField("scratchR", _totalCount.scratchR + todayCounts[1]);
+        form.AddField("key1", _totalCount.key1 + todayCounts[2]);
+        form.AddField("key2", _totalCount.key2 + todayCounts[3]);
+        form.AddField("key3", _totalCount.key3 + todayCounts[4]);
+        form.AddField("key4", _totalCount.key4 + todayCounts[5]);
+        form.AddField("key5", _totalCount.key5 + todayCounts[6]);
+        form.AddField("key6", _totalCount.key6 + todayCounts[7]);
+        form.AddField("key7", _totalCount.key7 + todayCounts[8]);
 
         using var request = UnityWebRequest.Post($"{_baseUri}/save.php", form);
         yield return request.SendWebRequest();
@@ -120,6 +135,9 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(request.downloadHandler.text);
+        } else
+        {
+            Debug.Log(request.result);
         }
 
         request.Dispose();
@@ -128,9 +146,9 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
 
 public interface ITotalCountManager
 {
-    public void LoadTotalCount(string uuid);
+    public void LoadTotalCountAndSetUUID(string uuid);
 
-    public void SaveTotalCount(string uuid, List<int> todayCounts);
+    public void SaveTotalCount(List<int> todayCounts);
 
     public long GetTotalSum();
 
