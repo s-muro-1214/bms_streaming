@@ -22,7 +22,7 @@ public class KeyPerSec : MonoBehaviour
 
     private void Update()
     {
-        if (StateService.GetState() == BeatorajaState.MUSICSELECT)
+        if (StateService.CurrentState == BeatorajaState.MUSICSELECT)
         {
             _maxValue = 0;
             _barMax = 1;
