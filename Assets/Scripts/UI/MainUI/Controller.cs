@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
@@ -30,6 +31,12 @@ public class Controller : MonoBehaviour
     {
         IKeyCountManager manager = ServiceLocator.GetInstance<IKeyCountManager>();
         List<bool> status = manager.GetAllKeyStatus();
+
+        if (StateService.CurrentState != BeatorajaState.PLAY &&
+            StateService.PreviousState == BeatorajaState.PLAY)
+        {
+            status = Enumerable.Repeat<bool>(false, status.Count).ToList();
+        }
 
         _scratchL.material = status[0] ? _matPressed : _matReleased;
         _scratchR.material = status[1] ? _matPressed : _matReleased;
