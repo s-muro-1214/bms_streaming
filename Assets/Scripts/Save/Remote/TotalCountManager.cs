@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class TotalCountManager : MonoBehaviour, ITotalCountManager
 {
-    private static readonly string _baseUri = "https://izuna.net/db_supporter/savedata";
+    private static readonly string _baseUri = "https://izuna.net/db_supporter";
 
     private TotalCount _totalCount;
     private string _uuid;
@@ -98,7 +98,7 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         form.AddField("token", Configuration.TOKEN);
         form.AddField("uuid", _uuid);
 
-        using var request = UnityWebRequest.Post($"{_baseUri}/load.php", form);
+        using var request = UnityWebRequest.Post($"{_baseUri}/savedata/load.php", form);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
@@ -129,7 +129,7 @@ public class TotalCountManager : MonoBehaviour, ITotalCountManager
         form.AddField("key6", _totalCount.key6 + todayCounts[7]);
         form.AddField("key7", _totalCount.key7 + todayCounts[8]);
 
-        using var request = UnityWebRequest.Post($"{_baseUri}/save.php", form);
+        using var request = UnityWebRequest.Post($"{_baseUri}/savedata/save.php", form);
         yield return request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)
