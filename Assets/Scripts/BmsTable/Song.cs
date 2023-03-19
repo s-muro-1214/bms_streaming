@@ -1,11 +1,20 @@
-﻿public record Song
-{
-    public string Title { get; }
-    public string Artist { get; }
-    public string Md5 { get; }
-    public string Sha256 { get; }
-    public string Level { get; }
+﻿using System;
 
-    public Song(string title, string artist, string md5, string sha256, string level) =>
-        (Title, Artist, Md5, Sha256, Level) = (title, artist, md5, sha256, level);
+[Serializable]
+public class Song
+{
+    public string title;
+    public string artist;
+    public string md5;
+    public string sha256;
+    public string level;
+
+    public Song(string title, string artist, string md5, string sha256, string level)
+    {
+        this.title = title;
+        this.artist = artist;
+        this.md5 = md5;
+        this.sha256 = sha256;
+        this.level = level;
+    }
 }

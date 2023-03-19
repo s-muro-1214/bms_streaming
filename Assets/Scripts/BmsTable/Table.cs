@@ -1,9 +1,14 @@
-﻿public record Table
+﻿public class Table
 {
-    public string Name { get; }
-    public string Symbol { get; }
-    public string DataUrl { get; }
+    public string name;
+    public string symbol;
+    public string dataUrl;
 
-    public Table(string name, string symbol, string dataUrl) =>
-        (Name, Symbol, DataUrl) = (name, symbol, dataUrl);
+    public Table(string name, string symbol, string dataUrl)
+    {
+        this.name = name;
+        this.symbol = symbol;
+        this.dataUrl = dataUrl;
+    }
+        
 }
