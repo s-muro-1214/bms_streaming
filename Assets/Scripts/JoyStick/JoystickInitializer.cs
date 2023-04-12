@@ -4,16 +4,20 @@ using UnityEngine.InputSystem.Controls;
 
 public class JoystickInitializer : MonoBehaviour
 {
+    [SerializeField] private Canvas _canvas;
+
     private void Start()
     {
         if (Joystick.current == null)
         {
-            return;
+            _canvas.enabled = true;
+            Application.Quit();
         }
 
         if (!Joystick.current.name.Contains("Controller INF"))
         {
-            return;
+            _canvas.enabled = true;
+            Application.Quit();
         }
 
         IKeySettingsManager manager = ServiceLocator.GetInstance<IKeySettingsManager>();
