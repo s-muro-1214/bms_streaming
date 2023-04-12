@@ -32,8 +32,7 @@ public class Controller : MonoBehaviour
         IKeyCountManager manager = ServiceLocator.GetInstance<IKeyCountManager>();
         List<bool> status = manager.GetAllKeyStatus();
 
-        if (StateService.CurrentState != BeatorajaState.PLAY &&
-            StateService.PreviousState == BeatorajaState.PLAY)
+        if (StateService.CurrentState != BeatorajaState.PLAY)
         {
             status = Enumerable.Repeat<bool>(false, status.Count).ToList();
         }
