@@ -72,7 +72,10 @@ public class RandomViewer : MonoBehaviour
                 _lane7.sprite = _sprites[randomPatterns[6] - 1];
                 RandomPatternService.ResetRandomChanged();
 
-                PlayWav(randomPatterns);
+                if(StateService.CurrentState == BeatorajaState.PLAY)
+                {
+                    PlayWav(randomPatterns);
+                }
             }
         }
     }
